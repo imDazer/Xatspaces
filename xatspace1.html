@@ -1,0 +1,191 @@
+
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<style>
+body {
+margin:0;
+}
+#back{
+width:100%;
+height:100%;
+background:url('https://cdn.discordapp.com/attachments/831681018431668225/831720877149782046/frame_3057.png') no-repeat center/cover fixed;
+}
+#text h1{
+position:absolute;
+left:2%;
+bottom:2%;
+margin:auto;
+width: max-content;
+color:#fff;
+font-size:35px;
+font-family: 'Montserrat', sans-serif;
+opacity:0.3;
+}
+#text2 h1{
+position:absolute;
+right:2%;
+bottom:2%;
+margin:auto;
+width: max-content;
+color:#fff;
+font-size:35px;
+font-family: 'Montserrat', sans-serif;
+opacity:0.3;
+}
+@keyframes move-background {
+  from {
+    -webkit-transform: translate3d(0px, 0px, 0px);
+  }
+  to { 
+    -webkit-transform: translate3d(1000px, 0px, 0px);
+  }
+}
+@-webkit-keyframes move-background {
+  from {
+    -webkit-transform: translate3d(0px, 0px, 0px);
+  }
+  to { 
+    -webkit-transform: translate3d(1000px, 0px, 0px);
+  }
+}
+
+@-moz-keyframes move-background {    
+  from {
+    -webkit-transform: translate3d(0px, 0px, 0px);
+  }
+  to { 
+    -webkit-transform: translate3d(1000px, 0px, 0px);
+  }
+}
+
+    @-webkit-keyframes move-background {
+  from {
+    -webkit-transform: translate3d(0px, 0px, 0px);
+  }
+  to { 
+    -webkit-transform: translate3d(1000px, 0px, 0px);
+  }
+}
+@keyframes move-background2 {
+  from {
+    -webkit-transform: translate3d(0px, -750px, 0px);
+    opacity:1;
+  }
+  to { 
+    -webkit-transform: translate3d(0px, 800px, 0px);
+    opacity:0.6;
+  }
+}
+@-webkit-keyframes move-background2 {
+  from {
+    -webkit-transform: translate3d(0px, -750px, 0px);
+    opacity:1;
+  }
+  to { 
+    -webkit-transform: translate3d(0px, 800px, 0px);
+    opacity:0;
+  }
+}
+
+@-moz-keyframes move-background2 {    
+  from {
+    -webkit-transform: translate3d(0px, -750px, 0px);
+    opacity:1;
+  }
+  to { 
+    -webkit-transform: translate3d(0px, 800px, 0px);
+    opacity:0;
+  }
+}
+
+
+.background-container{
+  position: fixed;
+  top: 0;
+  left:0;
+  bottom: 0;
+  right: 0;
+}
+
+.stars {
+ background:  url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png) repeat-y;
+ position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+    z-index: 0;
+
+ -moz-animation:move-background2 50s linear infinite;
+  -ms-animation:move-background2 50s linear infinite;
+  -o-animation:move-background2 50s linear infinite;
+  -webkit-animation:move-background2 50s linear infinite;
+  animation:move-background2 50s linear infinite;
+}
+
+.twinkling{
+  width:10000px;
+  height: 100%;
+  background: transparent url("") repeat;
+  background-size: 1000px 1000px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    
+    -moz-animation:move-background 70s linear infinite;
+  -ms-animation:move-background 70s linear infinite;
+  -o-animation:move-background 70s linear infinite;
+  -webkit-animation:move-background 70s linear infinite;
+  animation:move-background 70s linear infinite;
+  
+}
+
+.clouds{
+  width:10000px;
+  height: 100%;
+  background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/clouds_repeat.png") repeat;
+  background-size: 1000px 1000px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 3;
+    opacity:0.4;
+
+   -moz-animation:move-background 50s linear infinite;
+  -ms-animation:move-background 50s linear infinite;
+  -o-animation:move-background 50s linear infinite;
+  -webkit-animation:move-background 50s linear infinite;
+  animation:move-background 50s linear infinite;
+}
+img{
+  height: 70vh;
+  width:70vh;
+  position: absolute;
+  z-index: 3;
+  right: 20px;
+}
+</style>
+
+<div id="back">
+</div>
+
+<div class="background-container">
+<div class="stars"></div>
+<div class="twinkling"></div>
+<div class="clouds"></div>
+
+<div id="text">
+<h1>Without love, the truth cannot be seen.</h1>
+</div>
+
+<div id="text2">
+<h1>Discord: Sylar#0001</h1>
+</div>
