@@ -27,6 +27,14 @@ html {
      height:100%;
      object-fit: cover;
  }
+audio {
+     position:center;
+     top: 0;
+     left:0;
+     width:100%;
+     height:100%;
+     object-fit: cover;
+ }
 #wrapper {
 	-webkit-overflow-scrolling: touch;
 	align-items: center;
