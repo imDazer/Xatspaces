@@ -30,7 +30,7 @@ html {
 audio {
      position:center;
      top: 100;
-     left:0;
+     left:100;
      object-fit: cover;
  }
 #wrapper {
