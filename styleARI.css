@@ -266,7 +266,7 @@ h1,h2,h3,h4,h5,h6{
 	border:solid 4px #76bad7
 }
 .jd-row span{
-	background:#5aadda;
+	background:#f7cdd9;
 	width:110px;
 	line-height:40px;
 	padding-left:10px;
@@ -274,21 +274,21 @@ h1,h2,h3,h4,h5,h6{
 	font-size:.8em
 }
 .jd-row a{
-	background:#76a8d7;
+	background:#f7cdd9;
 	width:60px;
 	line-height:30px;
 	font-size:.8em;
 	transition:all .3s ease-out
 }
 .jd-row a:hover{
-	color:#9ec3ff;
-	background:#e86093
+	color:#f7cdd9;
+	background:#e86093;
 }
 .jd-video{
 	width:726px;
 	height:410px;
 	background:#222;
-	box-shadow:0 10px #76add7;
+	box-shadow:0 10px #f7cdd9;
 	margin-left:calc(50% - 363px)
 }
 .page-modal-love .jd-block{
