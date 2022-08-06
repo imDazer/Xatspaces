@@ -21,7 +21,7 @@ a{
 	text-decoration:none;
 	text-transform:uppercase;
 	text-align:center;
-	color:#e7e7e7
+	color:#fbf0dd
 }
 span{
 	display:inline-block
@@ -68,7 +68,7 @@ h1,h2,h3,h4,h5,h6{
 	align-items:center;
 }
 .jd-box-g{
-	background:#c0aa77;
+	background:#fde8c6;
 	border:solid 10px #fff;
 	box-shadow:0 0 20px 4px rgba(0,0,0,.4);
 	position:relative;
@@ -133,7 +133,7 @@ h1,h2,h3,h4,h5,h6{
 	justify-content:center
 }
 .jd-btn-nav{
-	background-image: url(https://img.xatblog.net/image/1lIbEBqx31r.png);
+	background-image: url(https://img.xatblog.net/image/iOfXzUAMV0.png);
 	box-shadow:0 -1px #fff inset;
 	transition:all .3s ease-out
 }
