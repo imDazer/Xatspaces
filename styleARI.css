@@ -1,4 +1,4 @@
-﻿{background:repeating-linear-gradient(0deg, rgba(0,0,0,.2) 1px, transparent 2px, transparent 6px),          repeating-linear-gradient(90deg, rgba(0,0,0,.2) 1px, transparent 2px, transparent 1px),         radial-gradient(#000000, #222); }*{cursor:url(https://img.xatblog.net/image/W441UeHmWTO.png),auto}/*-*/
+{background:repeating-linear-gradient(0deg, rgba(0,0,0,.2) 1px, transparent 2px, transparent 6px),          repeating-linear-gradient(90deg, rgba(0,0,0,.2) 1px, transparent 2px, transparent 1px),         radial-gradient(#000000, #222); }*{cursor:url(https://img.xatblog.net/image/W441UeHmWTO.png),auto}/*-*/
 {
 	background:#c0aa77
 }
@@ -65,7 +65,7 @@ h1,h2,h3,h4,h5,h6{
 	height:380px;
 	display:flex;
 	justify-content:center;
-	align-items:center
+	align-items:center;
 }
 .jd-box-g{
 	background:#c0aa77;
@@ -75,7 +75,9 @@ h1,h2,h3,h4,h5,h6{
 	display:flex;
 	align-items:center;
 	justify-content:center;
-	overflow:hidden
+	overflow:hidden;
+    left:0;
+	top:120;
 }
 .jd-box-g:nth-child(1),.jd-box-g:nth-child(5){
 	width:170px;
@@ -192,7 +194,7 @@ h1,h2,h3,h4,h5,h6{
 #jd-content-3:target .jd-modal{
 	transform:translate(0,0)
 }
-#jd-content-3:target .page-modal-video1{
+#jd-content-3:target .page-modal-video{
 	opacity:1;
 	visibility:visible
 }
