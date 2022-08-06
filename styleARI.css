@@ -192,7 +192,7 @@ h1,h2,h3,h4,h5,h6{
 #jd-content-3:target .jd-modal{
 	transform:translate(0,0)
 }
-#jd-content-3:target .page-modal-video{
+#jd-content-3:target .page-modal-video1{
 	opacity:1;
 	visibility:visible
 }
@@ -285,6 +285,13 @@ h1,h2,h3,h4,h5,h6{
 	background:#e86093;
 }
 .jd-video{
+	width:726px;
+	height:610px;
+	background:#222;
+	box-shadow:0 10px #f7cdd9;
+	margin-left:calc(50% - 363px)
+}
+.jd-video1{
 	width:726px;
 	height:610px;
 	background:#222;
