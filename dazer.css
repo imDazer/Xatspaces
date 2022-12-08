@@ -50,10 +50,10 @@ audio1 {
 #main {
 	--alignment: center;
 	--flex-alignment: center;
-	--border-radius-tl: 1.5rem;
-	--border-radius-tr: 1.5rem;
-	--border-radius-br: 1.5rem;
-	--border-radius-bl: 1.5rem;
+	--border-radius-tl: 2.5rem;
+	--border-radius-tr: 2.5rem;
+	--border-radius-br: 2.5rem;
+	--border-radius-bl: 2.5rem;
 	align-items: center;
 	display: flex;
 	flex-grow: 0;
