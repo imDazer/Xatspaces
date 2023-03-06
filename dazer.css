@@ -284,7 +284,7 @@ h1 .li, h2 .li, h3 .li, p .li {
 	font-family: 'Poppins', sans-serif;
 	letter-spacing: 0.075rem;
 	width: calc(100% + 0.075rem);
-	font-size: 0.625em;
+	font-size: 1.1em;
 	line-height: 1.125;
 	font-weight: 600;
 	text-shadow: 0.088rem 0.088rem 0.125rem #C9C9C9;
