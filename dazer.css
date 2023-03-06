@@ -72,7 +72,7 @@ audio1 {
 	--padding-horizontal: 0rem;
 	--padding-vertical: 0rem;
 	--spacing: 2rem;
-	--width: 68rem;
+	--width: 250rem;
 	border-radius: var(--border-radius-tl) var(--border-radius-tr) var(--border-radius-br) var(--border-radius-bl);
 	max-width: 100%;
 	position: relative;
