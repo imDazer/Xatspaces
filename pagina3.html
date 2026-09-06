@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090706">
+<title>Mi espacio · Halloween</title>
+
+<style>
+  * { box-sizing: border-box; }
+
+  html {
+    color-scheme: dark;
+    background: #090706;
+  }
+
+  body {
+    margin: 0;
+    color: #fff0e5;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .halloween {
+    --orange: #ff760a;
+    position: relative;
+    isolation: isolate;
+    min-height: 100svh;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    padding: 64px 20px;
+    background:
+      radial-gradient(ellipse at 50% 0%, #6c260833, transparent 60%),
+      radial-gradient(ellipse at 100% 80%, #a536091c, transparent 45%),
+      #090706;
+  }
+
+  .halloween::before {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 1px solid #ff760a30;
+    pointer-events: none;
+  }
+
+  .halo {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    width: min(78vw, 580px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid #ff9a4270;
+    box-shadow:
+      0 0 35px #ff620a28,
+      inset 0 0 35px #ff620a28;
+    transform: translateX(-50%);
+    animation: breathe 7s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .halo::after {
+    content: "";
+    position: absolute;
+    inset: 16px;
+    border: 1px dashed #ff760a24;
+    border-radius: 50%;
+  }
+
+  .fog {
+    position: absolute;
+    inset: 35% -45% -20%;
+    background:
+      radial-gradient(ellipse at 25% 60%, #84746b17, transparent 42%),
+      radial-gradient(ellipse at 65% 75%, #b67b5020, transparent 38%);
+    filter: blur(32px);
+    animation: drift 22s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .fog.second {
+    inset: 0 -40% 10%;
+    opacity: .5;
+    animation-duration: 31s;
+    animation-direction: alternate-reverse;
+  }
+
+  .sparks {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .spark {
+    position: absolute;
+    bottom: -15px;
+    left: var(--x);
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background: #ffb35c;
+    box-shadow: 0 0 10px #ff6600;
+    opacity: 0;
+    animation: rise var(--duration) linear infinite;
+    animation-delay: var(--delay);
+  }
+
+  .content {
+    width: min(100%, 700px);
+    text-align: center;
+  }
+
+  .eyebrow {
+    margin: 0 0 25px;
+    color: #e3a276;
+    font-size: .8rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+  }
+
+  .symbol {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 3rem;
+    filter: drop-shadow(0 0 22px #ff680078);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  h1 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(3rem, 12vw, 6.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -.055em;
+    color: #ffb46b;
+    text-shadow:
+      0 0 8px #ff6a00aa,
+      0 0 38px #ff6a0066,
+      0 0 80px #ff6a0033;
+    overflow-wrap: anywhere;
+  }
+
+  .subtitle {
+    margin: 23px 0 35px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #d3bba9;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    color: var(--orange);
+    margin: 0 auto 32px;
+    width: min(80%, 340px);
+  }
+
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ff760a90);
+  }
+
+  .divider::after { transform: rotate(180deg); }
+
+  .music {
+    position: relative;
+    padding: clamp(18px, 4vw, 30px);
+    text-align: left;
+    border: 1px solid #ff760a65;
+    border-radius: 16px;
+    background: linear-gradient(140deg, #23140ed9, #0d0b0aef);
+    box-shadow:
+      0 0 35px #ff620012,
+      inset 0 1px 0 #ffb57518,
+      0 25px 65px #0008;
+  }
+
+  .music::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 20%;
+    right: 20%;
+    height: 2px;
+    background: #ffb16c;
+    box-shadow: 0 0 16px #ff6a00;
+  }
+
+  .music-label {
+    margin: 0 0 12px;
+    font-size: .75rem;
+    color: #ffa261;
+    text-transform: uppercase;
+    letter-spacing: .22em;
+  }
+
+  h2 {
+    margin: 0 0 6px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  .artist {
+    margin: 0 0 23px;
+    color: #c6b5aa;
+    font-size: .95rem;
+  }
+
+  .video {
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid #ffffff14;
+    background: #000;
+  }
+
+  iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 200px;
+    border: 0;
+  }
+
+  .music-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+    font-size: .875rem;
+    line-height: 1.5;
+    color: #c6b5aa;
+  }
+
+  a {
+    color: #ffb276;
+    text-underline-offset: 4px;
+  }
+
+  a:hover { color: #ffe4ce; }
+
+  button {
+    font: inherit;
+    cursor: pointer;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid #ffb276;
+    outline-offset: 5px;
+  }
+
+  .bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 30px;
+    color: #bc9b86;
+    font-size: .8rem;
+    letter-spacing: .08em;
+  }
+
+  .motion-button {
+    padding: 9px 14px;
+    border: 1px solid #ff760a40;
+    border-radius: 30px;
+    color: #dfb89b;
+    background: #140e0a;
+    letter-spacing: normal;
+  }
+
+  .motion-button:hover {
+    background: #2a180d;
+    border-color: #ff760a;
+  }
+
+  .paused *,
+  .paused *::before,
+  .paused *::after {
+    animation-play-state: paused !important;
+  }
+
+  @keyframes breathe {
+    from { opacity: .4; }
+    to { opacity: .9; }
+  }
+
+  @keyframes drift {
+    from { transform: translateX(-8%) rotate(-5deg); }
+    to { transform: translateX(8%) rotate(5deg); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-4deg); }
+    50% { transform: translateY(-9px) rotate(4deg); }
+  }
+
+  @keyframes rise {
+    0% { transform: translate(0, 0); opacity: 0; }
+    12% { opacity: .7; }
+    85% { opacity: .35; }
+    100% {
+      transform: translate(var(--travel), -110svh);
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .halloween { padding: 48px 22px; }
+    .halloween::before { inset: 9px; }
+    .eyebrow { letter-spacing: .16em; }
+    .music-footer { justify-content: center; text-align: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .halloween *,
+    .halloween *::before,
+    .halloween *::after {
+      animation: none !important;
+    }
+    .spark { display: none; }
+  }
+</style>
+</head>
+
+<body>
+<main class="halloween" id="halloween">
+  <div class="halo" aria-hidden="true"></div>
+  <div class="fog" aria-hidden="true"></div>
+  <div class="fog second" aria-hidden="true"></div>
+  <div class="sparks" id="sparks" aria-hidden="true"></div>
+
+  <div class="content">
+    <p class="eyebrow">El otro lado de la medianoche</p>
+    <span class="symbol" aria-hidden="true">🎃</span>
+
+    <!-- CAMBIA TU NOMBRE AQUÍ -->
+    <h1>DAZZ (101314)</h1>
+
+    <!-- PUEDES CAMBIAR ESTA FRASE -->
+    <p class="subtitle">
+      Hay noches que no terminan al despertar.
+    </p>
+
+    <div class="divider" aria-hidden="true">✦</div>
+
+    <section class="music" aria-labelledby="song-title">
+      <p class="music-label">La banda sonora de esta noche</p>
+      <h2 id="song-title">Nightmare</h2>
+      <p class="artist">Avenged Sevenfold</p>
+
+      <div class="video">
+        <iframe
+          src="https://www.youtube.com/embed/94bGzWyHbu0?playsinline=1"
+          title="Avenged Sevenfold — Nightmare"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="music-footer">
+        <span>Pulsa ▶ en el video para escuchar.</span>
+        <a
+          href="https://www.youtube.com/watch?v=94bGzWyHbu0"
+          target="_blank"
+          rel="noopener noreferrer">
+          Abrir en YouTube
+        </a>
+      </div>
+    </section>
+
+    <footer class="bottom">
+      <span>BIENVENIDO A MI LADO OSCURO</span>
+      <button
+        class="motion-button"
+        id="motion"
+        type="button"
+        aria-pressed="false"
+        hidden>
+        Pausar efectos
+      </button>
+    </footer>
+  </div>
+</main>
+
+<script>
+(() => {
+  const space = document.getElementById("halloween");
+  const sparks = document.getElementById("sparks");
+  const button = document.getElementById("motion");
+  const preference = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  );
+
+  const fragment = document.createDocumentFragment();
+
+  for (let i = 0; i < 32; i++) {
+    const spark = document.createElement("i");
+    spark.className = "spark";
+    spark.style.setProperty("--x", Math.random() * 100 + "%");
+    spark.style.setProperty("--size", 1 + Math.random() * 3 + "px");
+    spark.style.setProperty("--duration", 9 + Math.random() * 15 + "s");
+    spark.style.setProperty("--delay", -Math.random() * 24 + "s");
+    spark.style.setProperty("--travel", Math.random() * 160 - 80 + "px");
+    fragment.appendChild(spark);
+  }
+
+  sparks.appendChild(fragment);
+
+  function updateMotionControl() {
+    button.hidden = preference.matches;
+  }
+
+  updateMotionControl();
+  preference.addEventListener("change", updateMotionControl);
+
+  button.addEventListener("click", () => {
+    const paused = space.classList.toggle("paused");
+    button.setAttribute("aria-pressed", String(paused));
+    button.textContent = paused ? "Activar efectos" : "Pausar efectos";
+  });
+})();
+</script>
+</body>
+</html>
