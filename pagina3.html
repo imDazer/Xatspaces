@@ -105,29 +105,61 @@ body {
   animation-delay: var(--delay);
 }
 
-/* Murciélagos que cruzan de lado a lado. */
+/* VUELO DE LOS MURCIÉLAGOS */
 .bat {
   position: absolute;
-  left: -100px;
+  left: -140px;
   top: var(--top);
-  font-size: var(--size);
-  opacity: .65;
+  width: var(--size);
+  opacity: var(--opacity, .8);
   animation: fly var(--duration) linear infinite;
   animation-delay: var(--delay);
 }
 
 .bat.reverse {
   left: auto;
-  right: -100px;
+  right: -140px;
   animation-name: flyBack;
 }
 
-.bat span {
+.bat svg {
   display: block;
-  filter: grayscale(1) brightness(.65)
-          drop-shadow(0 0 5px #ff7b00aa);
-  animation: flutter .65s ease-in-out infinite alternate;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 0 3px #ff760a90);
 }
+
+/* Cada ala gira desde su unión con el cuerpo. */
+.wing {
+  fill: #181016;
+  stroke: #ba622d;
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+  transform-box: view-box;
+  animation-duration: var(--flap, .65s);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-delay: var(--delay);
+}
+
+.wing-left {
+  transform-origin: 60px 35px;
+  animation-name: leftWing;
+}
+
+.wing-right {
+  transform-origin: 60px 35px;
+  animation-name: rightWing;
+}
+
+.bat-body {
+  fill: #100d12;
+  stroke: #ba622d;
+  stroke-width: 1;
+}
+
+.bat-eye { fill: #ff9a3c; }
 
 .content {
   width: min(100%, 720px);
@@ -173,7 +205,6 @@ h1 {
   height: 1px;
   margin: 0 auto 36px;
   background: linear-gradient(90deg, transparent, #ff760a, transparent);
-  box-shadow: 0 0 18px #ff6a0040;
 }
 
 .player {
@@ -253,12 +284,14 @@ button { font: inherit; cursor: pointer; }
   min-width: 0;
   accent-color: #ff8c32;
 }
+
 .status {
   margin: 12px 0 0;
   color: #d2b29b;
   font-size: .8rem;
   line-height: 1.5;
 }
+
 .footer {
   margin-top: 32px;
   color: #b69882;
@@ -266,6 +299,7 @@ button { font: inherit; cursor: pointer; }
   letter-spacing: .1em;
   line-height: 1.7;
 }
+
 .effects {
   margin-top: 14px;
   padding: 9px 14px;
@@ -281,15 +315,16 @@ button:focus-visible, input:focus-visible {
   outline-offset: 5px;
 }
 
-/* Mantiene visibles los controles al navegar con teclado. */
 .space:has(:focus-visible)::after {
   animation: none;
   opacity: 0;
 }
+
 .space.paused *,
 .space.paused *::after {
   animation-play-state: paused !important;
 }
+
 .space.paused::after {
   animation: none;
   opacity: 0;
@@ -299,22 +334,27 @@ button:focus-visible, input:focus-visible {
   0%, 100% { opacity: 0; }
   50% { opacity: .88; }
 }
+
 @keyframes glow {
   from { opacity: .35; }
   to { opacity: .9; }
 }
+
 @keyframes drift {
   from { transform: translateX(-8%); }
   to { transform: translateX(8%); }
 }
+
 @keyframes float {
   0%, 100% { transform: translateY(0) rotate(-4deg); }
   50% { transform: translateY(-10px) rotate(4deg); }
 }
+
 @keyframes bars {
   from { height: 5px; }
   to { height: 26px; }
 }
+
 @keyframes rise {
   0% { transform: translate(0, 0); opacity: 0; }
   15% { opacity: .7; }
@@ -324,22 +364,31 @@ button:focus-visible, input:focus-visible {
     opacity: 0;
   }
 }
+
+/* Alas extendidas y luego recogidas hacia el cuerpo. */
+@keyframes leftWing {
+  0%, 100% { transform: rotate(12deg) scaleX(1); }
+  50% { transform: rotate(-38deg) scaleX(.28); }
+}
+
+@keyframes rightWing {
+  0%, 100% { transform: rotate(-12deg) scaleX(1); }
+  50% { transform: rotate(38deg) scaleX(.28); }
+}
+
 @keyframes fly {
   0% { transform: translate(0, 0) rotate(-8deg); }
-  25% { transform: translate(calc(25vw + 50px), -30px) rotate(6deg); }
-  50% { transform: translate(calc(50vw + 100px), 20px) rotate(-5deg); }
-  75% { transform: translate(calc(75vw + 150px), -25px) rotate(5deg); }
-  100% { transform: translate(calc(100vw + 200px), 0) rotate(-8deg); }
+  25% { transform: translate(calc(25vw + 70px), -30px) rotate(6deg); }
+  50% { transform: translate(calc(50vw + 140px), 20px) rotate(-5deg); }
+  75% { transform: translate(calc(75vw + 210px), -25px) rotate(5deg); }
+  100% { transform: translate(calc(100vw + 280px), 0) rotate(-8deg); }
 }
+
 @keyframes flyBack {
-  0% { transform: translate(0, 0); }
-  35% { transform: translate(calc(-35vw - 70px), 35px); }
-  70% { transform: translate(calc(-70vw - 140px), -25px); }
-  100% { transform: translate(calc(-100vw - 200px), 0); }
-}
-@keyframes flutter {
-  from { transform: scaleY(.75) rotate(-7deg); }
-  to { transform: scaleY(1) rotate(7deg); }
+  0% { transform: translate(0, 0) rotate(6deg); }
+  35% { transform: translate(calc(-35vw - 98px), 35px) rotate(-8deg); }
+  70% { transform: translate(calc(-70vw - 196px), -25px) rotate(5deg); }
+  100% { transform: translate(calc(-100vw - 280px), 0) rotate(6deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -357,37 +406,127 @@ button:focus-visible, input:focus-visible {
   <div class="halo" aria-hidden="true"></div>
   <div class="fog" aria-hidden="true"></div>
   <div class="sparks" id="sparks" aria-hidden="true"></div>
-
-  <div class="bats" aria-hidden="true">
-    <div class="bat"
-      style="--top:12%;--size:45px;--duration:19s;--delay:-3s">
-      <span>🦇</span>
-    </div>
-    <div class="bat reverse"
-      style="--top:23%;--size:30px;--duration:25s;--delay:-12s">
-      <span>🦇</span>
-    </div>
-    <div class="bat"
-      style="--top:38%;--size:25px;--duration:23s;--delay:-17s">
-      <span>🦇</span>
-    </div>
-    <div class="bat reverse"
-      style="--top:65%;--size:48px;--duration:21s;--delay:-6s">
-      <span>🦇</span>
-    </div>
-    <div class="bat"
-      style="--top:82%;--size:35px;--duration:27s;--delay:-14s">
-      <span>🦇</span>
-    </div>
-    <div class="bat reverse"
-      style="--top:90%;--size:23px;--duration:30s;--delay:-22s">
-      <span>🦇</span>
-    </div>
-  </div>
+  <div class="bats" id="bats" aria-hidden="true"></div>
 
   <div class="content">
     <p class="eyebrow">El otro lado de la medianoche</p>
-    <span class="pumpkin" aria-hidden="true">🎃</span>
+   <span class="pumpkin" aria-hidden="true">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 200 190"
+    width="150"
+    height="143"
+    focusable="false"
+    style="display:block;margin:auto;overflow:visible">
+
+    <defs>
+      <radialGradient id="evil-pumpkin-skin" cx="45%" cy="35%" r="70%">
+        <stop offset="0%" stop-color="#bd4b12"/>
+        <stop offset="55%" stop-color="#732307"/>
+        <stop offset="100%" stop-color="#200b06"/>
+      </radialGradient>
+
+      <linearGradient id="evil-pumpkin-fire" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#fff0a0"/>
+        <stop offset="45%" stop-color="#ffac21"/>
+        <stop offset="100%" stop-color="#ff4800"/>
+      </linearGradient>
+
+      <filter id="evil-pumpkin-glow"
+        x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="3"/>
+      </filter>
+
+      <!-- Ojos y sonrisa tallados -->
+      <path id="evil-pumpkin-face"
+        d="M42 70 L83 88 L72 103 L48 96 Z
+           M158 70 L117 88 L128 103 L152 96 Z
+           M100 96 L91 112 L106 110 Z
+
+           M34 114
+           L52 126 L57 116 L67 134
+           L81 138 L84 125 L96 140
+           L108 139 L117 124 L122 135
+           L136 127 L145 111 L148 122
+           L168 108
+           L157 139 L145 151
+           L138 140 L127 159
+           L112 164 L108 151
+           L98 166 L84 164
+           L79 149 L70 159
+           L55 150 L46 135 Z"/>
+    </defs>
+
+    <!-- Tallo torcido -->
+    <path
+      d="M89 43
+         Q95 25 88 15
+         L101 9 L113 17
+         L105 24 L110 43Z"
+      fill="#352f16"
+      stroke="#766037"
+      stroke-width="2"/>
+
+    <path d="M99 17 Q105 25 99 39"
+      fill="none" stroke="#9b7337" stroke-width="2"/>
+
+    <!-- Cuerpo irregular -->
+    <path
+      d="M100 42
+         C76 24 52 35 43 47
+         C17 48 10 77 18 102
+         C7 130 27 160 51 166
+         C67 183 86 179 100 175
+         C122 186 144 175 151 168
+         C180 163 193 134 182 108
+         C195 82 180 51 158 48
+         C142 30 119 29 100 42Z"
+      fill="url(#evil-pumpkin-skin)"
+      stroke="#b54a17"
+      stroke-width="2"/>
+
+    <!-- Surcos -->
+    <g fill="none" stroke="#2e1008" stroke-width="3" opacity=".65">
+      <path d="M65 40 Q35 98 62 170"/>
+      <path d="M88 42 Q69 99 85 176"/>
+      <path d="M114 41 Q135 104 117 178"/>
+      <path d="M142 43 Q169 102 142 171"/>
+    </g>
+
+    <!-- Brillos en la piel -->
+    <g fill="none" stroke="#e96b21" stroke-width="2" opacity=".35">
+      <path d="M48 55 Q29 70 30 88"/>
+      <path d="M74 46 Q65 58 63 67"/>
+      <path d="M131 45 Q144 51 149 63"/>
+    </g>
+
+    <!-- Luz que sale del interior -->
+    <use href="#evil-pumpkin-face"
+      fill="#ff7100"
+      filter="url(#evil-pumpkin-glow)"/>
+
+    <use href="#evil-pumpkin-face"
+      fill="url(#evil-pumpkin-fire)"
+      stroke="#291007"
+      stroke-width="2.5"
+      stroke-linejoin="round"/>
+
+    <!-- Cortes sobre los ojos para una mirada amenazante -->
+    <path d="M37 65 L84 85 M163 65 L116 85"
+      fill="none"
+      stroke="#391209"
+      stroke-width="5"
+      stroke-linecap="round"/>
+
+    <!-- Cicatriz -->
+    <path d="M166 87 L160 102 L166 110
+             M159 91 L169 95
+             M157 100 L165 103"
+      fill="none"
+      stroke="#321008"
+      stroke-width="2.5"/>
+  </svg>
+</span>
 
     <!-- CAMBIA ESTE TEXTO POR TU APODO -->
     <h1>Dazz (101314)</h1>
@@ -433,7 +572,7 @@ button:focus-visible, input:focus-visible {
     </button>
 
     <noscript>
-      <p>Activa JavaScript para usar el reproductor.</p>
+      <p>Activa JavaScript para ver los murciélagos y usar el reproductor.</p>
     </noscript>
   </div>
 
@@ -444,6 +583,37 @@ button:focus-visible, input:focus-visible {
   <audio id="audio" src="Aven.mp3"
     autoplay loop preload="auto"></audio>
 </main>
+
+<!-- Murciélago con dos alas independientes -->
+<template id="bat-template">
+  <div class="bat">
+    <svg viewBox="0 0 120 80" aria-hidden="true" focusable="false">
+      <path class="wing wing-left"
+        d="M60 35
+           Q39 12 6 14
+           Q15 28 10 43
+           Q25 33 29 49
+           Q41 39 45 55
+           Q51 45 60 47 Z"/>
+      <path class="wing wing-right"
+        d="M60 35
+           Q81 12 114 14
+           Q105 28 110 43
+           Q95 33 91 49
+           Q79 39 75 55
+           Q69 45 60 47 Z"/>
+      <path class="bat-body"
+        d="M53 30
+           L52 19 L58 25
+           Q60 23 62 25
+           L68 19 L67 30
+           Q74 43 60 58
+           Q46 43 53 30 Z"/>
+      <circle class="bat-eye" cx="57" cy="32" r="1.3"/>
+      <circle class="bat-eye" cx="63" cy="32" r="1.3"/>
+    </svg>
+  </div>
+</template>
 
 <script>
 (() => {
@@ -519,7 +689,8 @@ button:focus-visible, input:focus-visible {
       : "Pausar efectos";
   });
 
-  const fragment = document.createDocumentFragment();
+  // Chispas naranjas.
+  const sparks = document.createDocumentFragment();
 
   for (let i = 0; i < 30; i++) {
     const spark = document.createElement("i");
@@ -529,13 +700,43 @@ button:focus-visible, input:focus-visible {
     spark.style.setProperty("--duration", 10 + Math.random() * 15 + "s");
     spark.style.setProperty("--delay", -Math.random() * 25 + "s");
     spark.style.setProperty("--travel", Math.random() * 160 - 80 + "px");
-    fragment.appendChild(spark);
+    sparks.appendChild(spark);
   }
 
-  document.getElementById("sparks").appendChild(fragment);
+  document.getElementById("sparks").appendChild(sparks);
 
-  // Si el navegador bloquea el inicio automático,
-  // el visitante puede pulsar el botón del reproductor.
+  // Murciélagos de diferentes tamaños y ritmos de aleteo.
+  const template = document.getElementById("bat-template");
+  const bats = document.createDocumentFragment();
+
+  const settings = [
+    { top: 12, size: 95, duration: 19, delay: -3, flap: .65 },
+    { top: 23, size: 60, duration: 25, delay: -12, flap: .48 },
+    { top: 38, size: 48, duration: 23, delay: -17, flap: .55 },
+    { top: 65, size: 105, duration: 21, delay: -6, flap: .72 },
+    { top: 82, size: 75, duration: 27, delay: -14, flap: .6 },
+    { top: 90, size: 50, duration: 30, delay: -22, flap: .5 }
+  ];
+
+  settings.forEach((config, index) => {
+    const bat = template.content.firstElementChild.cloneNode(true);
+
+    if (index % 2) bat.classList.add("reverse");
+
+    bat.style.setProperty("--top", config.top + "%");
+    bat.style.setProperty("--size", config.size + "px");
+    bat.style.setProperty("--duration", config.duration + "s");
+    bat.style.setProperty("--delay", config.delay + "s");
+    bat.style.setProperty("--flap", config.flap + "s");
+    bat.style.setProperty("--opacity", config.size < 65 ? ".55" : ".85");
+
+    bats.appendChild(bat);
+  });
+
+  document.getElementById("bats").appendChild(bats);
+
+  // Si el navegador bloquea el sonido automático,
+  // el visitante puede pulsar ▶.
   startMusic();
 })();
 </script>
