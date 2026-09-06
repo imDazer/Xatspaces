@@ -5,436 +5,472 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#090706">
 <title>Mi espacio · Halloween</title>
+/* Oscurecimiento suave de toda la página */
+.space::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  background: #000;
+  pointer-events: none;
+  animation: oscuridad 8s ease-in-out infinite;
+}
 
-<style>
-  * { box-sizing: border-box; }
+@keyframes oscuridad {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.88; }
+}
 
-  html {
-    color-scheme: dark;
-    background: #090706;
-  }
-
-  body {
-    margin: 0;
-    color: #fff0e5;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-
-  .halloween {
-    --orange: #ff760a;
-    position: relative;
-    isolation: isolate;
-    min-height: 100svh;
-    overflow: hidden;
-    display: grid;
-    place-items: center;
-    padding: 64px 20px;
-    background:
-      radial-gradient(ellipse at 50% 0%, #6c260833, transparent 60%),
-      radial-gradient(ellipse at 100% 80%, #a536091c, transparent 45%),
-      #090706;
-  }
-
-  .halloween::before {
-    content: "";
-    position: absolute;
-    inset: 18px;
-    border: 1px solid #ff760a30;
-    pointer-events: none;
-  }
-
-  .halo {
-    position: absolute;
-    top: 50px;
-    left: 50%;
-    width: min(78vw, 580px);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    border: 1px solid #ff9a4270;
-    box-shadow:
-      0 0 35px #ff620a28,
-      inset 0 0 35px #ff620a28;
-    transform: translateX(-50%);
-    animation: breathe 7s ease-in-out infinite alternate;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .halo::after {
-    content: "";
-    position: absolute;
-    inset: 16px;
-    border: 1px dashed #ff760a24;
-    border-radius: 50%;
-  }
-
-  .fog {
-    position: absolute;
-    inset: 35% -45% -20%;
-    background:
-      radial-gradient(ellipse at 25% 60%, #84746b17, transparent 42%),
-      radial-gradient(ellipse at 65% 75%, #b67b5020, transparent 38%);
-    filter: blur(32px);
-    animation: drift 22s ease-in-out infinite alternate;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .fog.second {
-    inset: 0 -40% 10%;
-    opacity: .5;
-    animation-duration: 31s;
-    animation-direction: alternate-reverse;
-  }
-
-  .sparks {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .spark {
-    position: absolute;
-    bottom: -15px;
-    left: var(--x);
-    width: var(--size);
-    height: var(--size);
-    border-radius: 50%;
-    background: #ffb35c;
-    box-shadow: 0 0 10px #ff6600;
+/* Respeta la preferencia de reducir animaciones */
+@media (prefers-reduced-motion: reduce) {
+  .space::after {
+    animation: none !important;
     opacity: 0;
-    animation: rise var(--duration) linear infinite;
-    animation-delay: var(--delay);
   }
+}
+<style>
+* { box-sizing: border-box; }
 
-  .content {
-    width: min(100%, 700px);
-    text-align: center;
-  }
+html {
+  background: #090706;
+  color-scheme: dark;
+}
 
-  .eyebrow {
-    margin: 0 0 25px;
-    color: #e3a276;
-    font-size: .8rem;
-    letter-spacing: .3em;
-    text-transform: uppercase;
-  }
+body {
+  margin: 0;
+  color: #fff0e5;
+  font-family: Arial, sans-serif;
+}
 
-  .symbol {
-    display: block;
-    margin-bottom: 15px;
-    font-size: 3rem;
-    filter: drop-shadow(0 0 22px #ff680078);
-    animation: float 6s ease-in-out infinite;
-  }
+.space {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: 60px 24px;
+  background:
+    radial-gradient(ellipse at 50% 15%, #76250935, transparent 60%),
+    radial-gradient(ellipse at 90% 85%, #a536091c, transparent 45%),
+    #090706;
+}
 
-  h1 {
-    margin: 0;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(3rem, 12vw, 6.5rem);
-    font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -.055em;
-    color: #ffb46b;
-    text-shadow:
-      0 0 8px #ff6a00aa,
-      0 0 38px #ff6a0066,
-      0 0 80px #ff6a0033;
-    overflow-wrap: anywhere;
-  }
+.space::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px solid #ff760a35;
+  pointer-events: none;
+}
 
-  .subtitle {
-    margin: 23px 0 35px;
-    font-family: Georgia, "Times New Roman", serif;
-    font-style: italic;
-    font-size: 1.15rem;
-    line-height: 1.6;
-    color: #d3bba9;
-  }
+.halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(85vw, 650px);
+  aspect-ratio: 1;
+  border: 1px solid #ff8c3866;
+  border-radius: 50%;
+  box-shadow: 0 0 50px #ff620025, inset 0 0 50px #ff620025;
+  transform: translate(-50%, -50%);
+  animation: glow 7s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: -1;
+}
 
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    color: var(--orange);
-    margin: 0 auto 32px;
-    width: min(80%, 340px);
-  }
+.halo::after {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border: 1px dashed #ff760a25;
+  border-radius: 50%;
+}
 
-  .divider::before,
-  .divider::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #ff760a90);
-  }
+.fog {
+  position: absolute;
+  inset: 20% -50% -30%;
+  background:
+    radial-gradient(ellipse at 25% 60%, #aa998522, transparent 40%),
+    radial-gradient(ellipse at 65% 75%, #b67b5025, transparent 38%);
+  filter: blur(35px);
+  animation: drift 24s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: -1;
+}
 
-  .divider::after { transform: rotate(180deg); }
+.sparks {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
 
-  .music {
-    position: relative;
-    padding: clamp(18px, 4vw, 30px);
-    text-align: left;
-    border: 1px solid #ff760a65;
-    border-radius: 16px;
-    background: linear-gradient(140deg, #23140ed9, #0d0b0aef);
-    box-shadow:
-      0 0 35px #ff620012,
-      inset 0 1px 0 #ffb57518,
-      0 25px 65px #0008;
-  }
+.spark {
+  position: absolute;
+  bottom: -12px;
+  left: var(--x);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: #ffb35c;
+  box-shadow: 0 0 12px #ff6600;
+  opacity: 0;
+  animation: rise var(--duration) linear infinite;
+  animation-delay: var(--delay);
+}
 
-  .music::before {
-    content: "";
-    position: absolute;
-    top: -1px;
-    left: 20%;
-    right: 20%;
-    height: 2px;
-    background: #ffb16c;
-    box-shadow: 0 0 16px #ff6a00;
-  }
+.content {
+  width: min(100%, 720px);
+  text-align: center;
+}
 
-  .music-label {
-    margin: 0 0 12px;
-    font-size: .75rem;
-    color: #ffa261;
-    text-transform: uppercase;
-    letter-spacing: .22em;
-  }
+.eyebrow {
+  color: #dfaa82;
+  font-size: .8rem;
+  letter-spacing: .23em;
+  text-transform: uppercase;
+}
 
-  h2 {
-    margin: 0 0 6px;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 2rem;
-    font-weight: 400;
-  }
+.pumpkin {
+  display: block;
+  margin: 30px 0 18px;
+  font-size: 3.5rem;
+  filter: drop-shadow(0 0 24px #ff680080);
+  animation: float 6s ease-in-out infinite;
+}
 
-  .artist {
-    margin: 0 0 23px;
-    color: #c6b5aa;
-    font-size: .95rem;
-  }
+h1 {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: clamp(3rem, 12vw, 6.5rem);
+  font-weight: normal;
+  line-height: 1.1;
+  letter-spacing: -.045em;
+  color: #ffb46b;
+  text-shadow: 0 0 10px #ff6a00aa, 0 0 40px #ff6a0066;
+  overflow-wrap: anywhere;
+}
 
-  .video {
-    overflow: hidden;
-    border-radius: 8px;
-    border: 1px solid #ffffff14;
-    background: #000;
-  }
+.subtitle {
+  margin: 24px 0 36px;
+  color: #d3bba9;
+  font: italic 1.15rem/1.7 Georgia, serif;
+}
 
-  iframe {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    min-height: 200px;
-    border: 0;
-  }
+.divider {
+  width: 180px;
+  height: 1px;
+  margin: 0 auto 36px;
+  background: linear-gradient(90deg, transparent, #ff760a, transparent);
+  box-shadow: 0 0 18px #ff6a0040;
+}
 
-  .music-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-top: 18px;
-    font-size: .875rem;
-    line-height: 1.5;
-    color: #c6b5aa;
-  }
+.player {
+  width: min(100%, 390px);
+  margin: auto;
+  padding: 18px;
+  border: 1px solid #ff760a70;
+  border-radius: 16px;
+  text-align: left;
+  background: linear-gradient(135deg, #28170fee, #100c0aee);
+  box-shadow: 0 0 30px #ff620018, 0 20px 50px #0006;
+}
 
-  a {
-    color: #ffb276;
-    text-underline-offset: 4px;
-  }
+.player-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
 
-  a:hover { color: #ffe4ce; }
+button { font: inherit; cursor: pointer; }
 
-  button {
-    font: inherit;
-    cursor: pointer;
-  }
+.play {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #ffab63;
+  border-radius: 50%;
+  color: #160a03;
+  font-size: 1.2rem;
+  background: #ff8c32;
+  box-shadow: 0 0 20px #ff6a0045;
+}
 
-  a:focus-visible,
-  button:focus-visible {
-    outline: 2px solid #ffb276;
-    outline-offset: 5px;
-  }
+.play:hover { background: #ffb570; }
 
-  .bottom {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 18px;
-    margin-top: 30px;
-    color: #bc9b86;
-    font-size: .8rem;
-    letter-spacing: .08em;
-  }
+.track { min-width: 0; flex: 1; }
 
-  .motion-button {
-    padding: 9px 14px;
-    border: 1px solid #ff760a40;
-    border-radius: 30px;
-    color: #dfb89b;
-    background: #140e0a;
-    letter-spacing: normal;
-  }
+.track strong {
+  display: block;
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+}
 
-  .motion-button:hover {
-    background: #2a180d;
-    border-color: #ff760a;
-  }
+.track span {
+  display: block;
+  margin-top: 6px;
+  color: #c7ad99;
+  font-size: .875rem;
+}
 
-  .paused *,
-  .paused *::before,
-  .paused *::after {
-    animation-play-state: paused !important;
-  }
+.equalizer {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 28px;
+}
 
-  @keyframes breathe {
-    from { opacity: .4; }
-    to { opacity: .9; }
-  }
+.equalizer i {
+  width: 3px;
+  height: 6px;
+  border-radius: 4px;
+  background: #ff9b50;
+}
 
-  @keyframes drift {
-    from { transform: translateX(-8%) rotate(-5deg); }
-    to { transform: translateX(8%) rotate(5deg); }
-  }
+.playing .equalizer i {
+  animation: bars .8s ease-in-out infinite alternate;
+}
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(-4deg); }
-    50% { transform: translateY(-9px) rotate(4deg); }
-  }
+.equalizer i:nth-child(2) { animation-delay: -.4s; }
+.equalizer i:nth-child(3) { animation-delay: -.2s; }
+.equalizer i:nth-child(4) { animation-delay: -.6s; }
 
-  @keyframes rise {
-    0% { transform: translate(0, 0); opacity: 0; }
-    12% { opacity: .7; }
-    85% { opacity: .35; }
-    100% {
-      transform: translate(var(--travel), -110svh);
-      opacity: 0;
-    }
-  }
+.volume {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  color: #d2b29b;
+  font-size: .875rem;
+}
 
-  @media (max-width: 480px) {
-    .halloween { padding: 48px 22px; }
-    .halloween::before { inset: 9px; }
-    .eyebrow { letter-spacing: .16em; }
-    .music-footer { justify-content: center; text-align: center; }
-  }
+.volume input {
+  width: 100%;
+  min-width: 0;
+  accent-color: #ff8c32;
+}
 
-  @media (prefers-reduced-motion: reduce) {
-    .halloween *,
-    .halloween *::before,
-    .halloween *::after {
-      animation: none !important;
-    }
-    .spark { display: none; }
-  }
+.status {
+  margin: 12px 0 0;
+  color: #d2b29b;
+  font-size: .8rem;
+  line-height: 1.5;
+}
+
+.footer {
+  margin-top: 32px;
+  color: #b69882;
+  font-size: .8rem;
+  letter-spacing: .1em;
+}
+
+.effects {
+  margin-top: 14px;
+  padding: 9px 14px;
+  color: #dab59a;
+  border: 1px solid #ff760a40;
+  border-radius: 20px;
+  background: #140e0a;
+  font-size: .8rem;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #ffd1a6;
+  outline-offset: 5px;
+}
+
+.paused *,
+.paused *::after {
+  animation-play-state: paused !important;
+}
+
+@keyframes glow {
+  from { opacity: .35; }
+  to { opacity: .9; }
+}
+
+@keyframes drift {
+  from { transform: translateX(-8%); }
+  to { transform: translateX(8%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-10px) rotate(4deg); }
+}
+
+@keyframes bars {
+  from { height: 5px; }
+  to { height: 26px; }
+}
+
+@keyframes rise {
+  0% { transform: translate(0, 0); opacity: 0; }
+  15% { opacity: .7; }
+  85% { opacity: .3; }
+  100% { transform: translate(var(--travel), -110svh); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .space *, .space *::after { animation: none !important; }
+  .spark, .effects { display: none; }
+}
 </style>
 </head>
 
 <body>
-<main class="halloween" id="halloween">
+<main class="space" id="space">
   <div class="halo" aria-hidden="true"></div>
   <div class="fog" aria-hidden="true"></div>
-  <div class="fog second" aria-hidden="true"></div>
   <div class="sparks" id="sparks" aria-hidden="true"></div>
 
   <div class="content">
     <p class="eyebrow">El otro lado de la medianoche</p>
-    <span class="symbol" aria-hidden="true">🎃</span>
+    <span class="pumpkin" aria-hidden="true">🎃</span>
 
-    <!-- CAMBIA TU NOMBRE AQUÍ -->
-    <h1>DAZZ (101314)</h1>
+    <!-- CAMBIA ESTE TEXTO POR TU APODO -->
+    <h1>Dazz (101314)</h1>
 
-    <!-- PUEDES CAMBIAR ESTA FRASE -->
-    <p class="subtitle">
-      Hay noches que no terminan al despertar.
-    </p>
+    <p class="subtitle">Hay noches que no terminan al despertar.</p>
+    <div class="divider" aria-hidden="true"></div>
 
-    <div class="divider" aria-hidden="true">✦</div>
+    <section class="player" id="player" aria-label="Reproductor de música">
+      <div class="player-row">
+        <button class="play" id="play" type="button"
+          aria-label="Reproducir música">▶</button>
 
-    <section class="music" aria-labelledby="song-title">
-      <p class="music-label">La banda sonora de esta noche</p>
-      <h2 id="song-title">Nightmare</h2>
-      <p class="artist">Avenged Sevenfold</p>
+        <div class="track">
+          <strong>Nightmare</strong>
+          <span>Avenged Sevenfold</span>
+        </div>
 
-      <div class="video">
-        <iframe
-          src="https://www.youtube.com/embed/94bGzWyHbu0?playsinline=1"
-          title="Avenged Sevenfold — Nightmare"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen>
-        </iframe>
+        <div class="equalizer" aria-hidden="true">
+          <i></i><i></i><i></i><i></i>
+        </div>
       </div>
 
-      <div class="music-footer">
-        <span>Pulsa ▶ en el video para escuchar.</span>
-        <a
-          href="https://www.youtube.com/watch?v=94bGzWyHbu0"
-          target="_blank"
-          rel="noopener noreferrer">
-          Abrir en YouTube
-        </a>
-      </div>
+      <label class="volume">
+        Volumen
+        <input id="volume" type="range"
+          min="0" max="1" step="0.01" value="0.6">
+      </label>
+
+      <p class="status" id="status" role="status">
+        Preparando música…
+      </p>
     </section>
 
-    <footer class="bottom">
-      <span>BIENVENIDO A MI LADO OSCURO</span>
-      <button
-        class="motion-button"
-        id="motion"
-        type="button"
-        aria-pressed="false"
-        hidden>
-        Pausar efectos
-      </button>
-    </footer>
+    <p class="footer">BIENVENIDO A MI LADO OSCURO</p>
+    <button class="effects" id="effects" type="button"
+      aria-pressed="false">Pausar efectos</button>
+
+    <noscript>
+      Activa JavaScript para usar el reproductor.
+    </noscript>
   </div>
+
+  <!--
+    SUBE TU AUDIO A LA MISMA CARPETA QUE ESTE HTML.
+    CAMBIA TU-CANCION.mp3 POR EL NOMBRE EXACTO.
+    EJEMPLO: src="nightmare.mp3"
+    TAMBIÉN PUEDES USAR UNA URL DIRECTA A UN ARCHIVO DE AUDIO.
+  -->
+  <audio id="audio" src="Aven.mp3" autoplay loop preload="auto"></audio>
 </main>
 
 <script>
 (() => {
-  const space = document.getElementById("halloween");
-  const sparks = document.getElementById("sparks");
-  const button = document.getElementById("motion");
-  const preference = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  );
+  const audio = document.getElementById("audio");
+  const play = document.getElementById("play");
+  const player = document.getElementById("player");
+  const status = document.getElementById("status");
+  const volume = document.getElementById("volume");
+  const space = document.getElementById("space");
+  const effects = document.getElementById("effects");
+
+  audio.volume = Number(volume.value);
+
+  function showError() {
+    status.textContent =
+      "No se pudo cargar el audio. Revisa el nombre y la ubicación del archivo.";
+  }
+
+  async function startMusic() {
+    try {
+      await audio.play();
+    } catch (error) {
+      if (audio.error || error.name === "NotSupportedError") {
+        showError();
+      } else if (error.name === "NotAllowedError") {
+        status.textContent = "Pulsa ▶ para iniciar la música.";
+      } else {
+        status.textContent = "Pulsa ▶ para intentar reproducir.";
+      }
+    }
+  }
+
+  play.addEventListener("click", () => {
+    if (audio.paused) startMusic();
+    else audio.pause();
+  });
+
+  audio.addEventListener("playing", () => {
+    player.classList.add("playing");
+    play.textContent = "❚❚";
+    play.setAttribute("aria-label", "Pausar música");
+    status.textContent = "Reproduciendo · Repetición activada";
+  });
+
+  audio.addEventListener("pause", () => {
+    player.classList.remove("playing");
+    play.textContent = "▶";
+    play.setAttribute("aria-label", "Reproducir música");
+    status.textContent = "Música en pausa";
+  });
+
+  audio.addEventListener("waiting", () => {
+    player.classList.remove("playing");
+    status.textContent = "Cargando música…";
+  });
+
+  audio.addEventListener("error", () => {
+    player.classList.remove("playing");
+    play.textContent = "▶";
+    play.setAttribute("aria-label", "Reproducir música");
+    showError();
+  });
+
+  volume.addEventListener("input", () => {
+    audio.volume = Number(volume.value);
+  });
+
+  effects.addEventListener("click", () => {
+    const paused = space.classList.toggle("paused");
+    effects.setAttribute("aria-pressed", String(paused));
+    effects.textContent = paused ? "Activar efectos" : "Pausar efectos";
+  });
 
   const fragment = document.createDocumentFragment();
 
-  for (let i = 0; i < 32; i++) {
+  for (let i = 0; i < 30; i++) {
     const spark = document.createElement("i");
     spark.className = "spark";
     spark.style.setProperty("--x", Math.random() * 100 + "%");
     spark.style.setProperty("--size", 1 + Math.random() * 3 + "px");
-    spark.style.setProperty("--duration", 9 + Math.random() * 15 + "s");
-    spark.style.setProperty("--delay", -Math.random() * 24 + "s");
+    spark.style.setProperty("--duration", 10 + Math.random() * 15 + "s");
+    spark.style.setProperty("--delay", -Math.random() * 25 + "s");
     spark.style.setProperty("--travel", Math.random() * 160 - 80 + "px");
     fragment.appendChild(spark);
   }
 
-  sparks.appendChild(fragment);
+  document.getElementById("sparks").appendChild(fragment);
 
-  function updateMotionControl() {
-    button.hidden = preference.matches;
-  }
-
-  updateMotionControl();
-  preference.addEventListener("change", updateMotionControl);
-
-  button.addEventListener("click", () => {
-    const paused = space.classList.toggle("paused");
-    button.setAttribute("aria-pressed", String(paused));
-    button.textContent = paused ? "Activar efectos" : "Pausar efectos";
-  });
+  // Intenta iniciar automáticamente. Si el navegador lo bloquea,
+  // el visitante puede iniciarlo con el botón del reproductor.
+  startMusic();
 })();
 </script>
 </body>
